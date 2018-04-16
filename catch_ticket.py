@@ -22,13 +22,12 @@ class CatchTicket(object):
 #        self.from_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
 #        self.to_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei
 
-        self.from_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei
+        self.from_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei, get from 12306 cookie
         self.to_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
 
 
 
         self.person = [u'XXX']               # your name here
-#        self.person = [u'陈晨', u'陈蕾澌']
 
         self.login_url = 'https://kyfw.12306.cn/otn/login/init'
         self.login_comp_url = 'https://kyfw.12306.cn/otn/index/initMy12306'
