@@ -5,5 +5,6 @@ just simulate the operation of human being to make your order process much quick
 
 # dependency
 Chrome Browser  
-python 3  
+chromedriver compatible with your chrome version  
+python 3  
 splinter
