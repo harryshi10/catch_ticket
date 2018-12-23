@@ -13,24 +13,24 @@ from splinter.browser import Browser
 
 class CatchTicket(object):
     def __init__(self):
-        self.order = 1         # the order of train you want (count from the web top when)
+        self.order = 6         # the order of train you want (count from the web top when)
 
-        self.username = u'XXX'          # your login info on 12306
-        self.passwd = u'XXX'          # your login info on 12306
+        self.username = u'18701312897'          # your login info on 12306
+        self.passwd = u'CraZy03171204'          # your login info on 12306
 
-        self.date = u'2018-02-25'
+        self.date = u'2019-01-21'
 #        self.from_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
 #        self.to_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei
 
-        self.from_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei, get from 12306 cookie
-        self.to_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
+        xian_bei_cookie =  u'%u897F%u5B89%u5317%2CEAY'
+        beijing_xi_cookie = u'%u5317%u4EAC%u897F%2CBXP'
+        self.from_station = beijing_xi_cookie
+        self.to_station = xian_bei_cookie
 
-
-
-        self.person = [u'XXX']               # your name here
+        self.person = [u'石桦', u'陈蕾澌']               # your name here
 
         self.login_url = 'https://kyfw.12306.cn/otn/login/init'
-        self.login_comp_url = 'https://kyfw.12306.cn/otn/index/initMy12306'
+        self.login_comp_url = 'https://kyfw.12306.cn/otn/view/index.html'
         self.search_url = 'https://kyfw.12306.cn/otn/leftTicket/init'
         self.order_submit_url = 'https://kyfw.12306.cn/otn/confirmPassenger/initDc'
 
@@ -48,7 +48,7 @@ class CatchTicket(object):
 
     def start_order(self):
         self.login()
-        self.driver.find_by_text(u'车票预订').click()
+        self.driver.visit(self.search_url)
 
         self.driver.cookies.add({"_jc_save_fromStation": self.from_station})
         self.driver.cookies.add({"_jc_save_toStation": self.to_station})
