@@ -15,8 +15,8 @@ class CatchTicket(object):
     def __init__(self):
         self.order = 6         # the order of train you want (count from the web top when)
 
-        self.username = u'18701312897'          # your login info on 12306
-        self.passwd = u'CraZy03171204'          # your login info on 12306
+        self.username = u'xxx'          # your login info on 12306
+        self.passwd = u'xxx'          # your login info on 12306
 
         self.date = u'2019-01-21'
 #        self.from_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
@@ -27,7 +27,7 @@ class CatchTicket(object):
         self.from_station = beijing_xi_cookie
         self.to_station = xian_bei_cookie
 
-        self.person = [u'石桦', u'陈蕾澌']               # your name here
+        self.person = [u'xxx', u'xxx']               # your name here
 
         self.login_url = 'https://kyfw.12306.cn/otn/login/init'
         self.login_comp_url = 'https://kyfw.12306.cn/otn/view/index.html'
