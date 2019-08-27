@@ -9,25 +9,26 @@
 
 from time import sleep
 from splinter.browser import Browser
+import re
 
 
 class CatchTicket(object):
     def __init__(self):
-        self.order = 6         # the order of train you want (count from the web top when)
+        self.train = "G87"  # train to be order
 
-        self.username = u'xxx'          # your login info on 12306
-        self.passwd = u'xxx'          # your login info on 12306
+        self.username = u'xxx'  # your login info on 12306
+        self.passwd = u'xxx'  # your login info on 12306
 
         self.date = u'2019-01-21'
-#        self.from_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
-#        self.to_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei
+        #        self.from_station = u'%u5317%u4EAC%u897F%2CBXP'  # beijing xi
+        #        self.to_station = u'%u897F%u5B89%u5317%2CEAY'  # xian bei
 
-        xian_bei_cookie =  u'%u897F%u5B89%u5317%2CEAY'
+        xian_bei_cookie = u'%u897F%u5B89%u5317%2CEAY'
         beijing_xi_cookie = u'%u5317%u4EAC%u897F%2CBXP'
         self.from_station = beijing_xi_cookie
         self.to_station = xian_bei_cookie
 
-        self.person = [u'xxx', u'xxx']               # your name here
+        self.person = [u'xxx', u'xxx']  # your name here
 
         self.login_url = 'https://kyfw.12306.cn/otn/login/init'
         self.login_comp_url = 'https://kyfw.12306.cn/otn/view/index.html'
@@ -45,6 +46,20 @@ class CatchTicket(object):
             print('fill in the certi code yourself...')
             sleep(1)
         print('login complete')
+
+    def get_train_index(self):  # get the index of selected train
+        all_div_tag = self.driver.find_by_tag('div')
+        train_index = 0
+        for div_tag in all_div_tag:
+            div_tag = div_tag.text
+            if "G" in div_tag:  # contains train
+                for context in div_tag.split('\n'):
+                    if re.search(r'G\d+', context):  # find train named G25
+                        if context == self.train:
+                            break
+                        train_index += 1
+                break
+        return train_index
 
     def start_order(self):
         self.login()
@@ -68,7 +83,8 @@ class CatchTicket(object):
                 if self.driver.find_by_text(u'网络繁忙'):
                     self.driver.find_by_text(u'确认').click()
                 else:
-                    self.driver.find_by_text(u'预订')[self.order].click()
+                    train_index = self.get_train_index()
+                    self.driver.find_by_text(u'预订')[train_index].click()
                 sleep(1)
                 count += 1
             except Exception as e:
@@ -80,7 +96,7 @@ class CatchTicket(object):
             self.driver.find_by_text(name).last.click()
         try:
             self.driver.find_by_text(u'提交订单').click()
-#            self.driver.find_by_text(u'确认').click()
+        #            self.driver.find_by_text(u'确认').click()
         except Exception as e:
             print(e)
             exit()
@@ -90,5 +106,3 @@ class CatchTicket(object):
 if __name__ == '__main__':
     catch = CatchTicket()
     catch.start_order()
-
-
