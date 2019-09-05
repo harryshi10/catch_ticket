@@ -25,6 +25,9 @@ class CatchTicket(object):
 
         xian_bei_cookie = u'%u897F%u5B89%u5317%2CEAY'
         beijing_xi_cookie = u'%u5317%u4EAC%u897F%2CBXP'
+        langfang = u'%u5ECA%u574A%2CLJP'
+        shanghai_hongqiao = u'%u4E0A%u6D77%2CSHH'
+
         self.from_station = beijing_xi_cookie
         self.to_station = xian_bei_cookie
 
@@ -92,6 +95,7 @@ class CatchTicket(object):
                 count += 1
                 continue
         print('enter order submit page')
+        sleep(1)
         for name in self.person:
             self.driver.find_by_text(name).last.click()
         try:
@@ -99,7 +103,6 @@ class CatchTicket(object):
         #            self.driver.find_by_text(u'确认').click()
         except Exception as e:
             print(e)
-            exit()
         print('order complete')
 
 
