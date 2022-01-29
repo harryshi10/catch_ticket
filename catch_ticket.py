@@ -109,3 +109,6 @@ class CatchTicket(object):
 if __name__ == '__main__':
     catch = CatchTicket()
     catch.start_order()
+    
+    
+    
